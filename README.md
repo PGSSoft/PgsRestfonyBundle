@@ -2,7 +2,7 @@ PGS Software / Restfony Bundle
 ==============================
 
 [![Latest Stable Version](https://poser.pugx.org/PGSSoft/PgsRestfonyBundle/v/stable)](https://packagist.org/packages/PGSSoft/PgsRestfonyBundle)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207-8892BF.svg)](https://php.net)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg)](https://php.net)
 [![License](https://poser.pugx.org/PGSSoft/PgsRestfonyBundle/license)](https://packagist.org/packages/PGSSoft/PgsRestfonyBundle)
 [![Build Status](https://travis-ci.org/PGSSoft/PgsRestfonyBundle.svg?branch=master)](https://travis-ci.org/PGSSoft/PgsRestfonyBundle)
 [![Code Coverage](https://scrutinizer-ci.com/g/PGSSoft/PgsRestfonyBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/PGSSoft/PgsRestfonyBundle/?branch=master)

@@ -98,20 +98,7 @@ class FormlyFormHandlerTest extends TestCase
         $formConfigInterface->getOption('custom-type')->willReturn($isCustomType);
         $formConfigInterface->getOption('label')->willReturn(true);
         $formConfigInterface->getRequired()->willReturn(true);
-        $formConfigInterface->getType()->willReturn(new class($typeName)
-        {
-            private $typeName;
-
-            public function __construct($typeName)
-            {
-                $this->typeName = $typeName;
-            }
-
-            public function getName()
-            {
-                return $this->typeName;
-            }
-        });
+        $formConfigInterface->getType()->willReturn(new DummyType($typeName));
         return $formConfigInterface->reveal();
     }
 }

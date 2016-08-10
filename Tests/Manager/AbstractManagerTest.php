@@ -43,18 +43,7 @@ class AbstractManagerTest extends TestCase
         $objectManager->persist(Argument::type('object'))->willReturn(true);
         $objectManager->remove(Argument::type('object'))->willReturn(true);
         $objectManager->flush()->willReturn(true);
-        $objectManager->createQueryBuilder()->willReturn(new class
-            {
-            public function __call($name, $arguments)
-            {
-                return method_exists($this, $name) ? $this->$name(...$arguments) : $this;
-            }
-
-            public function getMyName()
-            {
-                return 'classPretendingToBeQueryBuilder';
-            }
-        });
+        $objectManager->createQueryBuilder()->willReturn(new DummyQueryBuilder());
 
         $this->restCollectionType = new AbstractManager($objectManager->reveal(), 'Dummy');
     }

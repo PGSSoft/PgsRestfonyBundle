@@ -3,6 +3,7 @@
 namespace Pgs\RestfonyBundle\Tests\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Pgs\RestfonyBundle\Form\DataTransformer\RestEntityTransformer;
 use Pgs\RestfonyBundle\Tests\Controller\RestProphecyTestCase;
@@ -28,6 +29,13 @@ class RestEntityTransformerTest extends RestProphecyTestCase
         $this->classMetadata->method('setIdentifier')->willReturn('Dummy');
         $this->classMetadata->method('getIdentifierValues')->willReturn(['Dummy' => 'Dummy']);
 
+        $repository = $this->createMock(ObjectRepository::class);
+        $repository->method('find')->willReturnCallback(function ($id)
+            {
+                return $id === 1 ? new Dummy() : null;
+            }
+        );
+
         $objectManager = $this->createMock(ObjectManager::class);
         $objectManager
             ->method('getClassMetadata')
@@ -35,12 +43,7 @@ class RestEntityTransformerTest extends RestProphecyTestCase
             ->willReturn($this->classMetadata);
         $objectManager
             ->method('getRepository')
-            ->willReturn(new class {
-            public function find($id)
-            {
-                return $id === 1 ? new Dummy() : null;
-            }
-            });
+            ->willReturn($repository);
 
             $this->restEntityTransformer = new RestEntityTransformer($objectManager, 'Dummy');
     }
@@ -66,14 +69,7 @@ class RestEntityTransformerTest extends RestProphecyTestCase
      */
     public function returnToStringValueForObjectConvertibleToSting()
     {
-        $entity = new class {
-            public function __toString()
-            {
-                return 'Dummy';
-            }
-        };
-
-        $this->assertSame('Dummy', $this->restEntityTransformer->transform($entity));
+        $this->assertSame('Dummy', $this->restEntityTransformer->transform('Dummy'));
     }
 
     /**
