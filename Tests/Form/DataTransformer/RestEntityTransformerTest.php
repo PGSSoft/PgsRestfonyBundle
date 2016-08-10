@@ -30,11 +30,9 @@ class RestEntityTransformerTest extends RestProphecyTestCase
         $this->classMetadata->method('getIdentifierValues')->willReturn(['Dummy' => 'Dummy']);
 
         $repository = $this->createMock(ObjectRepository::class);
-        $repository->method('find')->willReturnCallback(function ($id)
-            {
+        $repository->method('find')->willReturnCallback(function ($id) {
                 return $id === 1 ? new Dummy() : null;
-            }
-        );
+        });
 
         $objectManager = $this->createMock(ObjectManager::class);
         $objectManager

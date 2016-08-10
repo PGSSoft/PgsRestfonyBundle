@@ -57,13 +57,13 @@ class BundleStructureHelper
 
     protected function getFullFilename($category, $args)
     {
-        $filename = $args[0] ?? str_replace('\\', '/', $this->entityClass) . $this->getClassSuffix($category) . '.php';
+        $filename = isset($args[0]) ? $args[0] : (str_replace('\\', '/', $this->entityClass) . $this->getClassSuffix($category) . '.php');
         return $this->getDirname($category, $args) . '/' . $filename;
     }
 
     protected function getFilename($category, $args)
     {
-        return basename($args[0] ?? str_replace('\\', '/', $this->entityClass) . $this->getClassSuffix($category) . '.php');
+        return basename(isset($args[0]) ? $args[0] : (str_replace('\\', '/', $this->entityClass) . $this->getClassSuffix($category) . '.php'));
     }
 
     protected function getDirname($category)

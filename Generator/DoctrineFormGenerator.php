@@ -93,7 +93,7 @@ class DoctrineFormGenerator extends Generator
     {
         $result = [];
         preg_match(addslashes('/:(([A-z0-9\]+)\)?[A-z0-9]+$/'), $entity, $result);
-        return $result[2] ?? '';
+        return isset($result[2]) ? $result[2] : '';
     }
 
     protected function prepareFormAlias($entityClass)
