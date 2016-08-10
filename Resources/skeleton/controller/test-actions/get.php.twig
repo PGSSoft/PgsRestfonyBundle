@@ -1,0 +1,28 @@
+
+    /**
+     * @test
+     */
+    public function itShouldRetrieveRecordForGetAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::GET_ACTION_POST_LOAD,
+            RestEvents::HANDLE_VIEW,
+        ]);
+
+        $result = $controller->getAction(new Request(), 1);
+
+        $this->assertInstanceOf(Response::class, $result);
+    }
+
+    /**
+     * @test
+     * @covers PGS\RestfonyBundle\Controller\RestController::findOr404
+     */
+    public function itShouldThrownExceptionForNotFoundRecordsForGetAction()
+    {
+        $controller = $this->createInstance('product', []);
+
+        $this->expectException(NotFoundHttpException::class);
+
+        $controller->getAction(new Request(), 2);
+    }

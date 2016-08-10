@@ -1,0 +1,45 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Get all {{ entity }}.
+     *
+{% block documentation %}
+{% if document %}
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Get all {{ entity }}.",
+     *   input="{{ namespace }}\Form\Filter\{{ entity_namespace }}{{ entity }}FilterType",
+     *   output="{{ namespace }}\Entity\{{ entity_namespace }}{{ entity }}",
+     *   statusCodes = {
+     *     200 = "List of all {{ entity }}",
+     *     204 = "No content. Nothing to list."
+     *   }
+     * )
+     *
+{% endif %}
+{% endblock documentation %}
+     * @View()
+     *
+     * @param Request $request
+     * @param ParamFetcherInterface $paramFetcher
+     *
+     * @return Response
+     *
+     * @QueryParam(name="page", requirements="\d+", default="1", description="Page of the overview.")
+     * @QueryParam(name="limit", requirements="\d+", default="10", description="Item count limit")
+     * @QueryParam(name="sorts", default="", description="Sorting")
+     *
+{% endblock phpdoc_method_header %}
+{% block phpdoc_method_annotations %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function cgetAction(Request $request, ParamFetcherInterface $paramFetcher)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        return parent::getList($request, $paramFetcher);
+{% endblock method_body %}
+{% block method_return '' %}
+    }
+{% block form '' %}

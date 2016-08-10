@@ -1,0 +1,13 @@
+
+    /**
+    * @test
+    */
+    public function itShouldDisplayFormViewForEditAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::EDIT_ACTION_LOAD,
+            RestEvents::HANDLE_VIEW,
+        ], false);
+
+        $controller->getEditAction(new Request(), 1);
+    }

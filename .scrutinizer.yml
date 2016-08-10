@@ -1,0 +1,17 @@
+build:
+    tests:
+        override:
+            -
+                coverage:
+                    file: './build/logs/clover.xml'
+                    format: 'php-clover'
+
+checks:
+    php: true
+
+coding_style:
+    php: {}
+
+filter:
+    excluded_paths:
+        - 'Tests/*'

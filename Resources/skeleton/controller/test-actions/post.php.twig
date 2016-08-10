@@ -1,0 +1,29 @@
+
+    /**
+    * @test
+    */
+    public function itShouldCreateNewRecordFromFormForPostAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::POST_ACTION_PRE_SUBMIT,
+            RestEvents::POST_ACTION_POST_VALIDATION,
+            RestEvents::POST_ACTION_POST_PERSIST,
+            RestEvents::HANDLE_VIEW,
+        ], true);
+
+        $controller->postAction(new Request());
+    }
+
+    /**
+    * @test
+    */
+    public function itShouldReturnValidatedFormForNotSubmittedFormForPostAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::POST_ACTION_PRE_SUBMIT,
+            RestEvents::POST_ACTION_VALIDATION_ERROR,
+            RestEvents::HANDLE_VIEW,
+        ], false);
+
+        $controller->postAction(new Request());
+    }

@@ -1,0 +1,29 @@
+
+    /**
+     * @test
+     */
+    public function itShouldEditRecordFromFormForPutAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::PUT_ACTION_PRE_SUBMIT,
+            RestEvents::PUT_ACTION_POST_VALIDATION,
+            RestEvents::PUT_ACTION_POST_PERSIST,
+            RestEvents::HANDLE_VIEW,
+        ], true);
+
+        $controller->putAction(new Request(), 1);
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnValidatedFormForNotSubmittedFormForPutAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::PUT_ACTION_PRE_SUBMIT,
+            RestEvents::PUT_ACTION_VALIDATION_ERROR,
+            RestEvents::HANDLE_VIEW,
+        ], false);
+
+        $controller->putAction(new Request(), 1);
+    }

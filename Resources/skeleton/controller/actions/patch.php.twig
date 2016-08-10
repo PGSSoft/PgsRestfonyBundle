@@ -1,0 +1,49 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Partial Update to a {{ entity }}.
+     *
+{% block documentation %}
+{% if document %}
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Partial Update to a {{ entity }}.",
+     *   input="{{ form_type|replace({'.php': ''}) }}",
+     *   output="{{ namespace }}\Entity\{{ entity_namespace }}{{ entity }}",
+     *   requirements={
+     *     {
+     *         "name"="{{ entity_identifier }}",
+     *         "dataType"="{{ entity_identifier_type }}",
+     *         "requirement"="{{ requirement_regex }}",
+     *         "description"="{{ entity }} identifier."
+     *     }
+     *   },
+     *   statusCodes={
+     *     200 = "Updated {{ entity }}.",
+     *     400 = "Bad Request.",
+     *     404 = "Not Found."
+     *   }
+     * )
+     *
+{% endif %}
+{% endblock documentation %}
+     *
+     * @View()
+     *
+     * @param Request $request
+     * @param {{ entity_identifier_type }} $id
+     *
+     * @return Response
+{% endblock phpdoc_method_header %}
+     */
+{% block method_definition %}
+    public function patchAction(Request $request, $id)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        // @todo set the name of field which have to be patched
+        // return parent::patch($request, 'field-to-patch', $id);
+{% endblock method_body %}
+{% block method_return '' %}
+    }
+{% block form '' %}

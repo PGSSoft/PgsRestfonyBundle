@@ -1,0 +1,43 @@
+<?php
+
+{% block namespace_block %}
+namespace {{ namespace }};
+{% endblock %}
+
+{% block use_statements %}
+use Doctrine\ORM\Query;
+use {{ bundle_namespace }}\Entity\{{ entity_class }};
+use {{ bundle_namespace }}\Repository\{{ entity_class }}Repository;
+use Pgs\RestfonyBundle\Manager\ManagerInterface;
+{% endblock use_statements %}
+
+/**
+{% block phpdoc_class_header %}
+ * Interface {{ class }}Interface
+ * @package {{ namespace }}
+{% endblock phpdoc_class_header %}
+ */
+{% block class_definition %}
+interface {{ class }}Interface extends ManagerInterface
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @return {{ entity_class }}Repository
+     */
+    public function getRepository();
+
+    /**
+     * @return {{ entity_class }}
+     */
+    public function create();
+
+    /**
+     * @param string $alias
+     * @param string $idAlias
+     * @param int $hydrationMode
+     * @return {{ entity_class }}[]
+     */
+    public function createList($alias, $idAlias, $hydrationMode = Query::HYDRATE_ARRAY);
+{% endblock class_body %}
+}

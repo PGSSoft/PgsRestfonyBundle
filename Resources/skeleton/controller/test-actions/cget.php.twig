@@ -1,0 +1,18 @@
+
+    /**
+     * @test
+     */
+    public function itShouldReturnPaginatedListForCgetAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::LIST_ACTION_BEFORE_PAGINATION,
+            RestEvents::LIST_ACTION_AFTER_PAGINATION,
+            RestEvents::HANDLE_VIEW,
+        ]);
+
+        $result = $controller->cgetAction(new Request(), $this->getParamFetcherMock([
+        'sorts' => 'id',
+        ]));
+
+        $this->assertInstanceOf(Response::class, $result);
+    }

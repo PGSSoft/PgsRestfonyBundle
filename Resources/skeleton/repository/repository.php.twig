@@ -1,0 +1,20 @@
+<?php
+
+{% block namespace_block %}
+namespace {{ namespace }};
+{% endblock namespace_block %}
+
+{% block use_statements %}
+use Pgs\RestfonyBundle\Repository\RestRepository;
+{% endblock use_statements %}
+
+class {{ class }} extends RestRepository
+{
+{% block class_body %}
+    public function getBaseQuery()
+    {
+        return $this
+            ->createQueryBuilder('{{ alias }}');
+    }
+{% endblock class_body %}
+}

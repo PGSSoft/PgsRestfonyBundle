@@ -1,0 +1,14 @@
+
+    /**
+     * @test
+     */
+    public function itShouldDeleteEntityForDeleteAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::DELETE_ACTION_PRE_DELETE,
+            RestEvents::DELETE_ACTION_POST_DELETE,
+            RestEvents::HANDLE_VIEW,
+        ], false);
+
+        $controller->deleteAction(new Request(), 1);
+    }

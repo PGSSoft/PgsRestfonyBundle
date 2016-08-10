@@ -1,0 +1,37 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Create a {{ entity }}.
+     *
+{% block documentation %}
+{% if document %}
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Create a {{ entity }}.",
+     *   input="{{ form_type|replace({'.php': ''}) }}",
+     *   output="{{ namespace }}\Entity\{{ entity_namespace }}{{ entity }}",
+     *   statusCodes={
+     *     201 = "Created {{ entity }}.",
+     *     400 = "Bad Request.",
+     *     404 = "Not Found."
+     *   }
+     * )
+     *
+{% endif %}
+{% endblock documentation %}
+     * @View(statusCode=201, serializerEnableMaxDepthChecks=true)
+     *
+     * @param Request $request
+     *
+     * @return Response
+{% endblock phpdoc_method_header %}
+     */
+{% block method_definition %}
+    public function postAction(Request $request)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        return parent::post($request);
+{% endblock method_body %}
+    }
+{% block form '' %}

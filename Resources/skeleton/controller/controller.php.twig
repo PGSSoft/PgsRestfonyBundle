@@ -1,0 +1,66 @@
+<?php
+
+namespace {{ namespace }}\Controller;
+
+{% block use_statements %}
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\RouteResource;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Pgs\RestfonyBundle\Controller\RestController;
+use {{ namespace }}\Manager\{{ entity }}ManagerInterface;
+{% endblock use_statements %}
+
+/**
+{% block phpdoc_class_header %}
+ * {{ entity }} controller.
+ * @package {{ namespace }}\Controller
+{% endblock phpdoc_class_header %}
+ * @RouteResource("{{ entity }}")
+{% block phpdoc_class_annotations %}
+ * @method {{ entity }}ManagerInterface getManager()
+{% endblock phpdoc_class_annotations %}
+ */
+{% block class_definition %}
+class {{ entity }}Controller extends RestController
+{% endblock class_definition %}
+{
+{%- block class_body -%}
+
+    {%- if 'get' in actions %}
+        {%- include 'controller/actions/getById.php.twig' %}
+    {%- endif -%}
+
+    {% if 'cget' in actions %}
+        {%- include 'controller/actions/getAll.php.twig' %}
+    {%- endif %}
+
+    {%- if 'post' in actions %}
+        {%- include 'controller/actions/post.php.twig' %}
+    {%- endif %}
+
+    {%- if 'put' in actions %}
+        {%- include 'controller/actions/put.php.twig' %}
+    {%- endif %}
+
+    {%- if 'patch' in actions %}
+        {%- include 'controller/actions/patch.php.twig' %}
+    {%- endif %}
+
+    {%- if 'delete' in actions %}
+        {%- include 'controller/actions/delete.php.twig' %}
+    {%- endif %}
+
+    {%- if 'new' in actions %}
+        {%- include 'controller/actions/new.php.twig' %}
+    {%- endif %}
+
+    {%- if 'edit' in actions %}
+        {%- include 'controller/actions/edit.php.twig' %}
+    {%- endif %}
+
+    {%- endblock class_body %}
+}

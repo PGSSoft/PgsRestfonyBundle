@@ -1,0 +1,16 @@
+<?php
+
+{% block namespace_block %}
+namespace {{ namespace }};
+{% endblock namespace_block %}
+
+{% block use_statements %}
+use {{ repository_class }};
+use Pgs\RestfonyBundle\Manager\AbstractManager;
+{% endblock use_statements %}
+
+class {{ class }} extends AbstractManager implements {{ class }}Interface
+{
+{% block class_body %}
+{% endblock class_body %}
+}

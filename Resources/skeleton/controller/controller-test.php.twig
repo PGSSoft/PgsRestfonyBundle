@@ -1,0 +1,70 @@
+<?php
+
+namespace {{ namespace }}\Tests\Controller;
+
+{% block use_statements %}
+use PGS\RestfonyBundle\RestEvents;
+use PGS\RestfonyBundle\Tests\Controller\RestProphecyTestCase;
+use PGS\RestfonyBundle\Tests\Controller\Fixtures\ProductController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+{% endblock use_statements %}
+
+/**
+{% block phpdoc_class_header %}
+ * {{ entity }} controller test.
+ * @package {{ namespace }}\Tests\Controller
+{% endblock phpdoc_class_header %}
+{% block phpdoc_class_annotations %}
+{% endblock phpdoc_class_annotations %}
+ */
+{% block class_definition %}
+class {{ entity }}ControllerTest extends RestProphecyTestCase
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @test
+     */
+    public function itShouldSetSortConfiguration()
+    {
+        $controller = $this->createInstance('product', []);
+        $controller->setSortConfiguration([]);
+
+        $this->assertInstanceOf(ProductController::class, $controller);
+    }
+{% if 'cget' in actions %}
+        {%- include 'controller/test-actions/cget.php.twig' %}
+    {%- endif -%}
+
+    {%- if 'get' in actions %}
+        {%- include 'controller/test-actions/get.php.twig' %}
+    {%- endif -%}
+
+    {%- if 'post' in actions %}
+        {%- include 'controller/test-actions/post.php.twig' %}
+    {%- endif -%}
+
+    {%- if 'put' in actions %}
+        {%- include 'controller/test-actions/put.php.twig' %}
+    {%- endif -%}
+
+    {%- if 'patch' in actions %}
+        {%- include 'controller/test-actions/patch.php.twig' %}
+    {%- endif -%}
+
+    {%- if 'delete' in actions %}
+        {%- include 'controller/test-actions/delete.php.twig' %}
+    {%- endif -%}
+
+    {%- if 'new' in actions %}
+        {%- include 'controller/test-actions/new.php.twig' %}
+    {%- endif -%}
+
+    {%- if 'edit' in actions %}
+        {%- include 'controller/test-actions/edit.php.twig' %}
+    {%- endif -%}
+
+    {%- endblock class_body %}
+}

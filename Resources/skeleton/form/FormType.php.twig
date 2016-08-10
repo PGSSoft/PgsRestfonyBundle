@@ -1,0 +1,68 @@
+<?php
+
+namespace {{ namespace }}\Form\Type{{ entity_namespace ? '\\' ~ entity_namespace : '' }};
+
+{% block use_statements %}
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use {{ namespace }}\Entity{{ entity_namespace ? '\\' ~ entity_namespace : '' }}\{{ entity_class }};
+{% endblock use_statements %}
+
+{% block class_definition %}
+class {{ entity_class }}Type extends AbstractType
+{% endblock class_definition %}
+{
+{% block class_body %}
+{%- if fields|length > 0 %}
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+{%- for field in fields %}
+{%- if loop.first %}
+
+{% endif %}
+{% if rest_support and field.fieldName in associations|keys %}
+            ->add('{{ field.fieldName }}', 'rest_{{ field.relatedType }}', [
+                'required' => false,
+                'entityName' => "{{ field.relatedEntityShortcut }}"
+            ])
+{% else %}
+{% if field.nullable or field.type == 'boolean' %}
+            ->add('{{ field.fieldName }}', null, ['required' => false])
+{% else %}
+            ->add('{{ field.fieldName }}')
+{% endif %}
+{% endif %}
+{%- endfor %}
+        ;
+    }
+{% endif %}
+
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => {{ entity_class }}::class
+        ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+{% if rest_support %}
+        return '{{ rest_form_type_name }}';
+{% else %}
+        return '{{ form_type_name }}_form_type';
+{% endif %}
+    }
+{% endblock class_body %}
+}

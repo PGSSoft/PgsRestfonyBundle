@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<?xml-model xlink:href='/usr/share/php5/PEAR/data/phing/etc/phing-grammar.rng'
+    type='application/xml'
+    schematypens='http://relaxng.org/ns/structure/1.0'
+?>
+
+<project name='Restfony' default='analyze'>
+
+    <property name='builddir' value='${application.startdir}' />
+
+    <target name='analyze'>
+        <mkdir dir='${builddir}/build/api' />
+        <mkdir dir='${builddir}/build/logs' />
+        <phingcall target='phpcs' />
+        <phingcall target='phpdepend' />
+        <phingcall target='phpdox' />
+        <phingcall target='phpmd' />
+        <phingcall target='phpcpd' />
+        <phingcall target='phpunit' />
+    </target>
+
+    <target name='phpcs'>
+        <phpcodesniffer
+                standard='PSR2'
+                format='summary'
+                allowedFileExtensions='php'
+                file='.'
+                ignorePatterns='Tests,vendor'
+        >
+            <formatter type='checkstyle' outfile='${builddir}/build/logs/checkstyle.xml' />
+        </phpcodesniffer>
+    </target>
+
+    <target name='phpdepend'>
+        <phpdepend>
+            <fileset dir='${builddir}'>
+                <exclude name='Tests/**' />
+                <exclude name='vendor/**' />
+            </fileset>
+            <logger type='jdepend-xml' outfile='${builddir}/build/logs/jdepend.xml' />
+            <analyzer type='coderank-mode' value='method' />
+        </phpdepend>
+    </target>
+
+    <target name='phpdox'>
+        <exec executable='${builddir}/vendor/bin/phpdox' passthru='true' />
+    </target>
+
+    <target name='phpmd'>
+        <phpmd>
+            <fileset dir='${builddir}'>
+                <exclude name='Tests/**' />
+                <exclude name='vendor/**' />
+            </fileset>
+            <formatter type='xml' outfile='${builddir}/build/logs/pmd.xml' />
+        </phpmd>
+    </target>
+
+    <target name='phpcpd'>
+        <phpcpd>
+            <fileset dir='${builddir}'>
+                <exclude name='Tests/**' />
+                <exclude name='vendor/**' />
+            </fileset>
+            <formatter type='pmd' outfile='${builddir}/build/logs/pmd-cpd.xml' />
+        </phpcpd>
+    </target>
+
+    <target name='phpunit'>
+        <exec executable='${application.startdir}/vendor/bin/phpunit' passthru='true' />
+    </target>
+
+</project>

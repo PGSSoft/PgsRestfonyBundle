@@ -1,0 +1,13 @@
+
+    /**
+    * @test
+    */
+    public function itShouldDisplayFormViewForNewAction()
+    {
+        $controller = $this->createInstance('product', [
+            RestEvents::NEW_ACTION_LOAD,
+            RestEvents::HANDLE_VIEW,
+        ], false);
+
+        $controller->getNewAction(new Request());
+    }

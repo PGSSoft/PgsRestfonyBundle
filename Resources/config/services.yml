@@ -1,0 +1,23 @@
+services:
+    form.type.rest_collection:
+        class: Pgs\RestfonyBundle\Form\Type\RestCollectionType
+        arguments: [ '@doctrine.orm.entity_manager' ]
+        tags:
+            - { name: form.type, alias: rest_collection }
+    form.type.rest_entity:
+        class: Pgs\RestfonyBundle\Form\Type\RestEntityType
+        arguments: [ '@doctrine.orm.entity_manager' ]
+        tags:
+            - { name: form.type, alias: rest_entity }
+
+    pgs.rest.paginator_factory:
+        class: Pgs\RestfonyBundle\Service\RestPaginatorFactory
+        arguments: [ '@knp_paginator', '@pgs.rest.relation_paginator_factory' ]
+
+    pgs.rest.relation_paginator_factory:
+        class: Pgs\RestfonyBundle\Service\RelationPaginatorFactory
+        arguments: [ '@router.default' ]
+
+    pgs.rest.doctrine.filter_query_builder:
+        class: Pgs\RestfonyBundle\Doctrine\FilterQueryBuilder
+        arguments: [ '@lexik_form_filter.query_builder_updater' ]
