@@ -1,9 +1,9 @@
 PGS Software / Restfony Bundle
 ==============================
 
-[![Latest Stable Version](https://poser.pugx.org/PGSSoft/PgsRestfonyBundle/v/stable)](https://packagist.org/packages/PGSSoft/PgsRestfonyBundle)
+[![Latest Stable Version](https://poser.pugx.org/pgs-soft/restfony-bundle/v/stable)](https://packagist.org/packages/pgs-soft/restfony-bundle)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg)](https://php.net)
-[![License](https://poser.pugx.org/PGSSoft/PgsRestfonyBundle/license)](https://packagist.org/packages/PGSSoft/PgsRestfonyBundle)
+[![License](https://poser.pugx.org/pgs-soft/restfony-bundle/license)](https://packagist.org/packages/pgs-soft/restfony-bundle)
 [![Build Status](https://travis-ci.org/PGSSoft/PgsRestfonyBundle.svg?branch=master)](https://travis-ci.org/PGSSoft/PgsRestfonyBundle)
 [![Code Coverage](https://scrutinizer-ci.com/g/PGSSoft/PgsRestfonyBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/PGSSoft/PgsRestfonyBundle/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/PGSSoft/PgsRestfonyBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/PGSSoft/PgsRestfonyBundle/?branch=master)
