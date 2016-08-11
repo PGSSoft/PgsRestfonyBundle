@@ -28,8 +28,8 @@ matrix:
 
 before_install:
     - composer self-update
-    - if [[ "$DEPENDENCIES" != "low" && ! $SYMFONY_VERSION ]]; then composer update; fi;
-    - if [[ "$DEPENDENCIES" != "low" && $SYMFONY_VERSION ]]; then composer require symfony/symfony:${SYMFONY_VERSION} -n; fi;
+    - if [[ ! $SYMFONY_VERSION ]]; then composer update; fi;
+    - if [[ $SYMFONY_VERSION ]]; then composer require symfony/symfony:${SYMFONY_VERSION} -n; fi;
 
 script:
     - ./vendor/bin/phpcs --extensions=php --report-full --standard=PSR2 --exclude=Generic.Files.LineLength --ignore=/vendor/ .
