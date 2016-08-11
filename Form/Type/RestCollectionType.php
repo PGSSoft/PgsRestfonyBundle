@@ -23,7 +23,10 @@ class RestCollectionType extends AbstractType
         $this->objectManager = $objectManager;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+	/**
+	 * @inheritdoc
+	 */
+	public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $transformer = new RestCollectionTransformer($this->objectManager, $options['entityName']);
         $viewTransformer = new ArrayToStringTransformer();
@@ -31,6 +34,9 @@ class RestCollectionType extends AbstractType
         $builder->addViewTransformer($viewTransformer);
     }
 
+	/**
+	 * @inheritdoc
+	 */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(['entityName']);
@@ -43,4 +49,12 @@ class RestCollectionType extends AbstractType
             });
         }
     }
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getName()
+	{
+		return 'collection';
+	}
 }

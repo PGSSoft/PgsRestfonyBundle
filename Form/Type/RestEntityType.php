@@ -22,13 +22,19 @@ class RestEntityType extends AbstractType
         $this->objectManager = $objectManager;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+	/**
+	 * @inheritdoc
+	 */
+	public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $transformer = new RestEntityTransformer($this->objectManager, $options['entityName']);
         $builder->addModelTransformer($transformer);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+	/**
+	 * @inheritdoc
+	 */
+	public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(['entityName']);
 
@@ -40,4 +46,12 @@ class RestEntityType extends AbstractType
             });
         }
     }
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getName()
+	{
+		return 'entity';
+	}
 }
