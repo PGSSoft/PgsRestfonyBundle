@@ -6,6 +6,7 @@
 
 /composer.lock
 
+/.idea/
 # do not create IDE related rules such as ".idea"
 # instead create global ignore file e.g.
 # git config --global core.excludesfile ~/.gitignore_global

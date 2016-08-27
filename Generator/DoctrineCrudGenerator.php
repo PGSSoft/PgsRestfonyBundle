@@ -29,6 +29,22 @@ class DoctrineCrudGenerator extends Generator
     protected $metadata;
     protected $actions;
 
+    private $allActionNames = [
+        ActionNamesInterface::GET_LIST,
+        ActionNamesInterface::GET,
+        ActionNamesInterface::POST,
+        ActionNamesInterface::PUT,
+        ActionNamesInterface::PATCH,
+        ActionNamesInterface::DELETE,
+        ActionNamesInterface::NEW_FORM,
+        ActionNamesInterface::EDIT_FORM
+    ];
+
+    private $getActionNames = [
+        ActionNamesInterface::GET_LIST,
+        ActionNamesInterface::GET,
+    ];
+
     /**
      * Constructor.
      *
@@ -59,8 +75,8 @@ class DoctrineCrudGenerator extends Generator
         $forceOverwrite
     ) {
         $this->actions = $needWriteActions
-            ? ['cget', 'get', 'post', 'put', 'patch', 'delete', 'new', 'edit']
-            : ['cget', 'get'];
+            ? $this->allActionNames
+            : $this->getActionNames;
 
         if (count($metadata->getIdentifier()) !== 1) {
             throw new RuntimeException('CRUD generator does not support entities with multiple or no primary keys.');
