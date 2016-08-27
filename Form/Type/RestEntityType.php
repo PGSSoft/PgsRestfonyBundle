@@ -22,12 +22,18 @@ class RestEntityType extends AbstractType
         $this->objectManager = $objectManager;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $transformer = new RestEntityTransformer($this->objectManager, $options['entityName']);
         $builder->addModelTransformer($transformer);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(['entityName']);
@@ -39,5 +45,13 @@ class RestEntityType extends AbstractType
                 return 'This value is not valid. Unable to find ' . $options['entityName'] . ' in the database.';
             });
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return 'entity';
     }
 }
